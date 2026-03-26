@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;background:transparent}
+#sub{position:fixed;bottom:8%;top:auto;left:50%;transform:translateX(-50%);text-align:center;
+font-family:sans-serif;font-size:20px;color:#ffffff;
+opacity:0;transition:opacity 0.3s;pointer-events:none;max-width:90%;line-height:1.4}
+#sub span{background:rgba(0,0,0,0.75);padding:6px 16px;border-radius:4px;display:inline-block}
+#sub.on{opacity:1}
+</style></head><body>
+<div id="sub"><span id="txt"></span></div>
+<script>
+var subs=[{"start":1.133,"end":6.5,"text":"Olá seja bem vindo a vídeo aula sobre Lean Health care aplicado a gestão hospitalar."},{"start":6.8,"end":7.6,"text":"Neste treinamento."},{"start":8.2,"end":11.4,"text":"Vamos discutir como melhorar processos assistenciais."},{"start":11.766,"end":15,"text":"Reduzir desperdícios e aumentar a segurança do paciente."},{"start":15.5,"end":17.4,"text":"Tudo isso por meio de uma abordagem."},{"start":17.533,"end":19.5,"text":"Estruturada de melhoria de processos."}];
+var autoplay=true;
+var delay=2000;
+var startTime=0,running=false,raf=null;
+var subEl=document.getElementById("sub");
+var txtEl=document.getElementById("txt");
+function showSub(t){var f=null;for(var i=0;i<subs.length;i++){if(t>=subs[i].start&&t<=subs[i].end){f=subs[i];break;}}if(f){txtEl.textContent=f.text;subEl.className="on";}else{subEl.className="";}}
+function tick(){if(!running)return;var t=(performance.now()-startTime)/1000;showSub(t);var mx=0;for(var i=0;i<subs.length;i++){if(subs[i].end>mx)mx=subs[i].end;}if(t<=mx+1)raf=requestAnimationFrame(tick);else{running=false;subEl.className="";}}
+function go(){startTime=performance.now();running=true;tick();}
+if(autoplay){setTimeout(go,delay);}
+</script></body></html>
