@@ -1,2 +1,2 @@
 # medportal-assets
-Repositoria conteúdo medportal
+Repositorio conteúdo medportal
